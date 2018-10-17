@@ -15,12 +15,12 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('/api/user', function () {
-  const username = 'exampleUser';
-  const password = 'examplePass';
+  const username = 'example@User.com';
+  const password = 'examplePass1234';
   const firstName = 'Example';
   const lastName = 'User';
-  const usernameB = 'exampleUserB';
-  const passwordB = 'examplePassB';
+  const usernameB = 'example@UserB.com';
+  const passwordB = 'examplePassB1234';
   const firstNameB = 'ExampleB';
   const lastNameB = 'UserB';
 
@@ -441,38 +441,38 @@ describe('/api/user', function () {
           expect(res.body).to.have.length(0);
         });
       });
-//      it('Should return an array of users', function () {
-//        return User.create(
-//          {
-//            username,
-//            password,
-//            firstName,
-//            lastName
-//          },
-//          {
-//            username: usernameB,
-//            password: passwordB,
-//            firstName: firstNameB,
-//            lastName: lastNameB
-//          }
-//        )
-//          .then(() => chai.request(app).get('/api/users'))
-//          .then(res => {
-//            expect(res).to.have.status(200);
-//            expect(res.body).to.be.an('array');
-//            expect(res.body).to.have.length(2);
-//            expect(res.body[0]).to.deep.equal({
-//              username,
-//              firstName,
-//              lastName
-//            });
-//            expect(res.body[1]).to.deep.equal({
-//              username: usernameB,
-//              firstName: firstNameB,
-//              lastName: lastNameB
-//            });
-//          });
-//      });
+      it('Should return an array of users', function () {
+        return User.create(
+          {
+            username,
+            password,
+            firstName,
+            lastName
+          },
+          {
+            username: usernameB,
+            password: passwordB,
+            firstName: firstNameB,
+            lastName: lastNameB
+          }
+        )
+          .then(() => chai.request(app).get('/api/users'))
+          .then(res => {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.an('array');
+            expect(res.body).to.have.length(2);
+            expect(res.body[0]).to.deep.equal({
+              username,
+              firstName,
+              lastName
+            });
+            expect(res.body[1]).to.deep.equal({
+              username: usernameB,
+              firstName: firstNameB,
+              lastName: lastNameB
+            });
+          });
+      });
     });
   });
 });

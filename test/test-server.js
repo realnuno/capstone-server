@@ -1,91 +1,91 @@
-//'use strict';
-//
-//const chai = require('chai');
-//const chaiHttp = require('chai-http');
-//const mongoose = require('mongoose');
-//
-//// this makes the should syntax available throughout
-//// this module
-////const should = chai.should();
-//const expect = chai.expect;
-//
-//
-//const {
-//    Mylist
-//} = require("../mylist/mylist-models");
-//const {
-//    router: mylistRouter
-//} = require("../mylist/mylist-router");
-//const {
-//    closeServer,
-//    runServer,
-//    app
-//} = require('../server');
-//const {
-//    TEST_DATABASE_URL
-//} = require('../config');
-//
-//chai.use(chaiHttp);
-//
-//
-//
-//
-//describe('travelers API resource', function () {
-//
-//    before(function () {
-//        return runServer(TEST_DATABASE_URL);
-//    });
-//
-//
-//    after(function () {
-//        return closeServer();
-//    });
-//
-//    // note the use of nested `describe` blocks.
-//    // this allows us to make clearer, more discrete tests that focus
-//    // on proving something small
-//    describe('GET endpoint', function () {
-//        it('should return all existing data', function () {
-//            // strategy:
-//            //    1. get back all posts returned by by GET request to `/api/mylist`
-//            //    2. prove res has right status, data type
-//            //    3. prove the number of posts we got back is equal to number
-//            //       in db.
-//            let res;
-//            return chai.request(app)
-//                .get('/api/mylist/test')
-//                .then(_res => {
-//                    res = _res;
-//                    expect(res).to.have.status(200);
-//                    // otherwise our db seeding didn't work
-//                    expect(res).to.be.json;
-//                    expect(res.body).to.be.a("array");
-//                    expect(res.body.length).to.be.above(0);
-//
-//                    return Mylist.count();
-//                });
-//        });
-//
-//        it('should return posts with right fields', function () {
-//            // Strategy: Get back all posts, and ensure they have expected keys
-//
-//            let resPost;
-//            return chai.request(app)
-//                .get('/api/mylist/test')
-//                .then(function (res) {
-//                    res.body.forEach(function (post) {
-//                        expect(post).to.be.a("object");
-//                        expect(post).to.have.all.keys( 'venueName', 'description','phoneNumber', 'category', 'address', 'website', 'photo1', 'photo2', 'memo', 'creationDate');
-//                    });
-//                    // just check one of the posts that its values match with those in db
-//                    // and we'll assume it's true for rest
-//                    resPost = res.body[0];
-//                    return Mylist.findById(resPost.id);
-//                })
-//        });
-//    });
-//
-//
+'use strict';
+
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const mongoose = require('mongoose');
+
+// this makes the should syntax available throughout
+// this module
+//const should = chai.should();
+const expect = chai.expect;
+
+
+const {
+    Mylist
+} = require("../mylist/mylist-models");
+const {
+    router: mylistRouter
+} = require("../mylist/mylist-router");
+const {
+    closeServer,
+    runServer,
+    app
+} = require('../server');
+const {
+    TEST_DATABASE_URL
+} = require('../config');
+
+chai.use(chaiHttp);
+
+
+
+
+describe('travelers API resource', function () {
+
+    before(function () {
+        return runServer(TEST_DATABASE_URL);
+    });
+
+
+    after(function () {
+        return closeServer();
+    });
+
+    // note the use of nested `describe` blocks.
+    // this allows us to make clearer, more discrete tests that focus
+    // on proving something small
+    describe('GET endpoint', function () {
+        it('should return all existing data', function () {
+            // strategy:
+            //    1. get back all posts returned by by GET request to `/api/mylist`
+            //    2. prove res has right status, data type
+            //    3. prove the number of posts we got back is equal to number
+            //       in db.
+            let res;
+            return chai.request(app)
+                .get('/api/mylist/test')
+                .then(_res => {
+                    res = _res;
+                    expect(res).to.have.status(200);
+                    // otherwise our db seeding didn't work
+                    expect(res).to.be.json;
+                    expect(res.body).to.be.a("array");
+                    expect(res.body.length).to.be.above(0);
+
+                    return Mylist.count();
+                });
+        });
+
+        it('should return posts with right fields', function () {
+            // Strategy: Get back all posts, and ensure they have expected keys
+
+            let resPost;
+            return chai.request(app)
+                .get('/api/mylist/test')
+                .then(function (res) {
+                    res.body.forEach(function (post) {
+                        expect(post).to.be.a("object");
+                        expect(post).to.have.all.keys( 'venueName', 'description',"id", "lat", "lng", 'phoneNumber', 'category', 'address', 'website', 'photo1', 'photo2', "venueId", 'memo', 'creationDate');
+                    });
+                    // just check one of the posts that its values match with those in db
+                    // and we'll assume it's true for rest
+                    resPost = res.body[0];
+                    return Mylist.findById(resPost.id);
+                })
+        });
+    });
+
+
 //       describe('POST endpoint', function () {
 //            // strategy: make a POST request with data,
 //            // then prove that the post we get back has
@@ -185,4 +185,4 @@
 //        });
 //
 //    });
-//});
+});
