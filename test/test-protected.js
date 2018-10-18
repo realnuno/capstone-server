@@ -41,7 +41,7 @@ describe('Protected endpoint', function () {
   });
 
   afterEach(function () {
-    return User.remove({});
+    return false;
   });
 
   describe('/api/protected', function () {

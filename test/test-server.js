@@ -131,58 +131,58 @@ describe('travelers API resource', function () {
 //                    })
 //            });
 //        });
-//
-//
-//
-//    describe('PUT endpoint', function () {
-//
-//        // strategy:
-//        //  1. Get an existing post from db
-//        //  2. Make a PUT request to update that post
-//        //  4. Prove post in db is correctly updated
-//        it('should update fields you send over', function () {
-//            return (
-//                chai
-//                .request(app)
-//                // first have to get
-//                .get('/api/mylist/test')
-//                .then(function (res) {
-//                    const updatedPost = Object.assign(res.body[0], {
-//                        memo: 'dogs dogs dogs'
-//                    });
-//                    return chai
-//                        .request(app)
-//                        .put(`/api/mylist/edit-memo/test/${res.body[0].id}`)
-//                        .send(updatedPost)
-//                        .then(function (res) {
-//                            expect(res).to.have.status(200);
-//                        });
-//                })
-//            );
-//        });
-//    });
-//
-//
-//
-//
-//
-//    describe('DELETE endpoint', function () {
-//        it("should delete posts on DELETE", function () {
-//            return (
-//                chai
-//                .request(app)
-//                // first have to get
-//                .get("/api/mylist/test")
-//                .then(function (res) {
-//                    return chai
-//                        .request(app)
-//                        .delete(`/api/mylist/test/${res.body[0].id}`)
-//                        .then(function (res) {
-//                            expect(res).to.have.status(204);
-//                        });
-//                })
-//            );
-//        });
-//
-//    });
+
+
+
+    describe('PUT endpoint', function () {
+
+        // strategy:
+        //  1. Get an existing post from db
+        //  2. Make a PUT request to update that post
+        //  4. Prove post in db is correctly updated
+        it('should update fields you send over', function () {
+            return (
+                chai
+                .request(app)
+                // first have to get
+                .get('/api/mylist/test')
+                .then(function (res) {
+                    const updatedPost = Object.assign(res.body[0], {
+                        memo: 'dogs dogs dogs'
+                    });
+                    return chai
+                        .request(app)
+                        .put(`/api/mylist/edit-memo/test/${res.body[0].id}`)
+                        .send(updatedPost)
+                        .then(function (res) {
+                            expect(res).to.have.status(200);
+                        });
+                })
+            );
+        });
+    });
+
+
+
+
+
+    describe('DELETE endpoint', function () {
+        it("should delete posts on DELETE", function () {
+            return (
+                chai
+                .request(app)
+                // first have to get
+                .get("/api/mylist/test")
+                .then(function (res) {
+                    return chai
+                        .request(app)
+                        .delete(`/api/mylist/test/${res.body[0].id}`)
+                        .then(function (res) {
+                            expect(res).to.have.status(204);
+                        });
+                })
+            );
+        });
+
+    });
 });
